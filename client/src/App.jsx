@@ -18,7 +18,7 @@ function App() {
   }
 
   return (
-    <div className="bg-[url('./bgImage.svg')] bg-cover min-h-screen">
+    <div className="bg-[url('/bgImage.svg')] bg-cover min-h-screen">
       <Toaster />
       <Routes>
         {/* Show HomePage if logged in, otherwise redirect to LoginPage */}
