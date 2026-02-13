@@ -1,13 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+@theme {
+  --font-outfit: "Outfit", sans-serif;
+}
 
 * {
   font-family: "Outfit", sans-serif;
 }
 
-::webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
