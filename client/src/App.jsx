@@ -12,7 +12,9 @@ function App() {
 
 useEffect(() => {
   if (!isCheckingAuth) {
-    setShowLoader(false);
+    setTimeout(() => {
+      setShowLoader(false);
+    }, 500);
   }
 }, [isCheckingAuth]);
 
