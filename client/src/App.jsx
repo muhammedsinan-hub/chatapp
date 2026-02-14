@@ -14,7 +14,7 @@ useEffect(() => {
   if (!isCheckingAuth) {
     setTimeout(() => {
       setShowLoader(false);
-    }, 500);
+    }, 1000);
   }
 }, [isCheckingAuth]);
 
