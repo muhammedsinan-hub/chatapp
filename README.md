@@ -25,7 +25,7 @@ Backend                      |   Node.js, Express.js"
 Database                     |   MongoDB (Mongoose ODM)
 Real-time                    |   Socket.io
 Storage                      |   Cloudinary API
-Deployment                   |   Render (Backend), Vercel/Netlify (Frontend)
+Deployment                   |   Vercel
 
 
 __________________________________________________________________________________________________________________________________
