@@ -35,7 +35,7 @@ const ProfilePage = () => {
           await updateProfile({ profilePic: base64Image, fullName: name, bio });
         };
       }
-      toast.success("Profile updated successfully!");
+      toast.success("Profile updated successfully! ");
       navigate("/");
     } catch (error) {
       console.error("Update failed", error);
