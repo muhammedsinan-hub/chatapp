@@ -39,7 +39,7 @@ const ProfilePage = () => {
       navigate("/");
     } catch (error) {
       console.error("Update failed", error);
-      toast.error("Failed to update profile");
+      toast.error("Failed to update profile ");
     } finally {
       setIsUpdating(false);
     }
