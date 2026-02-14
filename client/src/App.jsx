@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -8,8 +8,19 @@ import { AuthContext } from "../context/AuthContext";
 
 function App() {
   const { authUser, isCheckingAuth } = useContext(AuthContext);
+  const [showLoader, setShowLoader] = useState(true);
 
-  if (isCheckingAuth) {
+  useEffect(() => {
+    if (!isCheckingAuth) {
+      const timer = setTimeout(() => {
+        setShowLoader(false);
+      }, 1500); 
+
+      return () => clearTimeout(timer);
+    }
+  }, [isCheckingAuth]);
+
+  if (isCheckingAuth || showLoader) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#1a1a1a]">
         <div className="w-12 h-12 border-4 border-t-purple-500 border-gray-700 rounded-full animate-spin"></div>
