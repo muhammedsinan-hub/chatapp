@@ -10,15 +10,12 @@ function App() {
   const { authUser, isCheckingAuth } = useContext(AuthContext);
   const [showLoader, setShowLoader] = useState(true);
 
-  useEffect(() => {
-    if (!isCheckingAuth) {
-      const timer = setTimeout(() => {
-        setShowLoader(false);
-      }, 1500); 
+useEffect(() => {
+  if (!isCheckingAuth) {
+    setShowLoader(false);
+  }
+}, [isCheckingAuth]);
 
-      return () => clearTimeout(timer);
-    }
-  }, [isCheckingAuth]);
 
   if (isCheckingAuth || showLoader) {
     return (
@@ -29,7 +26,7 @@ function App() {
   }
 
   return (
-    <div className="bg-[url('/bgImage.svg')] bg-cover min-h-screen">
+<div className="bg-[#1a1a1a] bg-[url('/bgImage.svg')] bg-cover min-h-screen">
       <Toaster />
       <Routes>
         {/* Show HomePage if logged in, otherwise redirect to LoginPage */}
