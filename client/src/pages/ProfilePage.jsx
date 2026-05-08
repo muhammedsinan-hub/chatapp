@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import assets from "../assets/assets";
 import { AuthContext } from "../../context/AuthContext";
-import toast from "react-hot-toast"; 
+import toast from "react-hot-toast";
 
 const ProfilePage = () => {
   const { authUser, updateProfile } = useContext(AuthContext);
@@ -21,46 +21,44 @@ const ProfilePage = () => {
   }, [authUser]);
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsUpdating(true);
+    e.preventDefault();
+    setIsUpdating(true);
 
-  try {
-    if (!selectedImage) {
-      await updateProfile({ fullName: name, bio });
-    } else {
+    try {
+      if (!selectedImage) {
+        await updateProfile({ fullName: name, bio });
+
+        navigate("/");
+        setIsUpdating(false);
+        return;
+      }
+
       const reader = new FileReader();
-
       reader.onload = async () => {
         try {
-          const base64Image = reader.result;
-
           await updateProfile({
-            profilePic: base64Image,
+            profilePic: reader.result,
             fullName: name,
             bio,
           });
-
-          toast.success("Profile updated successfully!");
           navigate("/");
         } catch (err) {
-          toast.error("Upload failed");
+          console.log("Upload error:", err);
         } finally {
           setIsUpdating(false);
         }
       };
-
+      reader.onerror = () => {
+        console.log("FileReader failed");
+        setIsUpdating(false);
+      };
       reader.readAsDataURL(selectedImage);
-      return; // IMPORTANT
+    } catch (error) {
+      console.log("Profile update failed:", error);
+      setIsUpdating(false);
     }
+  };
 
-    toast.success("Profile updated successfully!");
-    navigate("/");
-  } catch (error) {
-    toast.error("Failed to update profile");
-  } finally {
-    setIsUpdating(false);
-  }
-};
 
   //Remove profile photo
   const handleRemovePhoto = async () => {
@@ -113,7 +111,9 @@ const ProfilePage = () => {
                 <span className="text-[10px]">Edit</span>
               </div>
             </div>
-            <span className="text-sm text-gray-400 uppercase">Upload profile image</span>
+            <span className="text-sm text-gray-400 uppercase">
+              Upload profile image
+            </span>
           </label>
 
           <input
