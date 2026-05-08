@@ -16,13 +16,14 @@ export const AuthProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   // LOGOUT FUNCTION
-  const logout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
-    setAuthUser(null);
-    if (socket) socket.disconnect();
-    toast.success("Logged out successfully");
-  };
+ const logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user"); 
+  setToken(null);
+  setAuthUser(null);
+  if (socket) socket.disconnect();
+  toast.success("Logged out successfully");
+};
 
   const checkAuth = async () => {
     const localToken = localStorage.getItem("token");
@@ -79,6 +80,7 @@ export const AuthProvider = ({ children }) => {
       });
       if (data.success) {
         setAuthUser(data.user);
+        localStorage.setItem("user", JSON.stringify(data.user));
         toast.success("Profile updated");
       }
     } catch (error) {
@@ -87,10 +89,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   const connectSocket = (userData) => {
-    if (!userData || socket?.connected) return;
-    const newSocket = io(backendUrl, { query: { userId: userData._id } });
+    if (!userData) return;
+    if (socket) socket.disconnect(); 
+    const newSocket = io(backendUrl, {
+      query: { userId: userData._id },
+    });
     setSocket(newSocket);
-    newSocket.on("getOnlineUsers", (ids) => setOnlineUsers(ids));
+    newSocket.on("getOnlineUsers", (ids) => {
+      setOnlineUsers(ids);
+    });
   };
 
   useEffect(() => {

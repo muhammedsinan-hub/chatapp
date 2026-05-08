@@ -21,29 +21,46 @@ const ProfilePage = () => {
   }, [authUser]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsUpdating(true);
+  e.preventDefault();
+  setIsUpdating(true);
 
-    try {
-      if (!selectedImage) {
-        await updateProfile({ fullName: name, bio });
-      } else {
-        const reader = new FileReader();
-        reader.readAsDataURL(selectedImage);
-        reader.onload = async () => {
+  try {
+    if (!selectedImage) {
+      await updateProfile({ fullName: name, bio });
+    } else {
+      const reader = new FileReader();
+
+      reader.onload = async () => {
+        try {
           const base64Image = reader.result;
-          await updateProfile({ profilePic: base64Image, fullName: name, bio });
-        };
-      }
-      toast.success("Profile updated successfully! ");
-      navigate("/");
-    } catch (error) {
-      console.error("Update failed", error);
-      toast.error("Failed to update profile ");
-    } finally {
-      setIsUpdating(false);
+
+          await updateProfile({
+            profilePic: base64Image,
+            fullName: name,
+            bio,
+          });
+
+          toast.success("Profile updated successfully!");
+          navigate("/");
+        } catch (err) {
+          toast.error("Upload failed");
+        } finally {
+          setIsUpdating(false);
+        }
+      };
+
+      reader.readAsDataURL(selectedImage);
+      return; // IMPORTANT
     }
-  };
+
+    toast.success("Profile updated successfully!");
+    navigate("/");
+  } catch (error) {
+    toast.error("Failed to update profile");
+  } finally {
+    setIsUpdating(false);
+  }
+};
 
   //Remove profile photo
   const handleRemovePhoto = async () => {

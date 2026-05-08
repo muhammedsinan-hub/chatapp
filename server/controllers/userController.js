@@ -75,17 +75,32 @@ export const updateProfile = async (req, res) => {
 
     let updateData = { bio, fullName };
 
+    // NEW IMAGE UPLOAD
     if (profilePic && profilePic.startsWith("data:image")) {
       const uploadResponse = await cloudinary.uploader.upload(profilePic);
       updateData.profilePic = uploadResponse.secure_url;
     }
 
-    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
-      new: true,
+    // REMOVE IMAGE CASE
+    if (profilePic === "") {
+      updateData.profilePic = "";
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      updateData,
+      { new: true }
+    );
+
+    res.json({
+      success: true,
+      user: updatedUser,
     });
 
-    res.json({ success: true, user: updatedUser });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
