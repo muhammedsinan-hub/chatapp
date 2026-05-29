@@ -25,13 +25,12 @@ function App() {
 
   if (isCheckingAuth || showLoader) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center px-4 text-center bg-[#1a1a1a]">
-
+<div className="min-h-screen w-full flex flex-col justify-center items-center px-4 text-center bg-[#1a1a1a]">
         {/* Logo */}
         <img
           src={assets.logo}
           alt="Logo"
-className="w-32 sm:w-40 mb-6 object-contain -translate-x-2"        />
+         className="w-28 sm:w-32 mb-4 mx-auto" />
 
         {/* Welcome Text */}
         <h1 className="text-2xl sm:text-3xl font-bold text-white">
