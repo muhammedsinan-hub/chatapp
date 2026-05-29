@@ -31,7 +31,7 @@ function App() {
         <img
           src={assets.logo}
           alt="Logo"
-className="w-32 sm:w-40 mb-6 mx-auto"
+className="w-32 sm:w-40 mb-6 mx-auto ml-1"
         />
 
         {/* Welcome Text */}
