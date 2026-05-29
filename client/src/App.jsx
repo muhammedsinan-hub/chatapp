@@ -5,7 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import { Toaster } from "react-hot-toast";
 import { AuthContext } from "../context/AuthContext";
-import { assets } from "./assets/assets";
+import assets from "./assets/assets";
 
 function App() {
 
