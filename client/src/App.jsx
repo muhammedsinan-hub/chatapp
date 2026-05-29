@@ -31,13 +31,12 @@ function App() {
         <img
           src={assets.logo}
           alt="Logo"
-          className="w-20 sm:w-24 mb-4"
+className="w-32 sm:w-40 mb-6 mx-auto"
         />
 
         {/* Welcome Text */}
         <h1 className="text-2xl sm:text-3xl font-bold text-white">
-          Welcome Back
-        </h1>
+ Welcome to QuickChat        </h1>
 
         <p className="text-sm text-gray-400 mt-2 mb-8">
           Preparing your chat experience...
