@@ -31,8 +31,7 @@ function App() {
         <img
           src={assets.logo}
           alt="Logo"
-className="w-32 sm:w-40 mb-6 mx-auto ml-1"
-        />
+className="w-32 sm:w-40 mb-6 object-contain -translate-x-2"        />
 
         {/* Welcome Text */}
         <h1 className="text-2xl sm:text-3xl font-bold text-white">
