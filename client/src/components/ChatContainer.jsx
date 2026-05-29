@@ -93,8 +93,7 @@ const ChatContainer = () => {
             onClick={() => setShowProfile(!showProfile)}
             src={assets.help_icon}
             alt="info"
-            className={`max-md:hidden max-w-5 mr-1 cursor-pointer transition-opacity ${showProfile ? "opacity-100" : "opacity-50"}`}
-          />
+  className="hidden lg:block max-w-5 mr-1 cursor-pointer transition-opacity opacity-50"          />
         </div>
 
         {/*------ MESSAGES AREA ------ */}

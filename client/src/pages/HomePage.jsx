@@ -4,21 +4,35 @@ import ChatContainer from "../components/ChatContainer";
 import RightSidebar from "../components/RightSidebar";
 
 const HomePage = () => {
+
   const [selectedUser, setSelectedUser] = useState(false);
+
   return (
-    <div className="border w-full h-screen sm:px-[15%] sm:py-[5%]">
+
+    <div className="w-full h-screen p-2 sm:px-[8%] sm:py-[3%] bg-transparent">
+
       <div
-        className={`backdrop-blur-xl border-2 border-gray-600 rounded-2xl overflow-hidden h-full flex relative 
-          ${selectedUser ? "md:grid-cols-3" : "md:grid-cols-2"} grid-cols-1`}
+        className="backdrop-blur-xl border border-gray-700 rounded-2xl overflow-hidden h-full flex relative bg-[#121212]/40"
       >
+
+        {/* Sidebar */}
         <Sidebar />
+
+        {/* Chat Area */}
         <ChatContainer />
-        <RightSidebar
-          selectedUser={selectedUser}
-          setSelectedUser={setSelectedUser}
-        />
+
+        {/* Right Sidebar - only desktop */}
+        <div className="hidden lg:block">
+          <RightSidebar
+            selectedUser={selectedUser}
+            setSelectedUser={setSelectedUser}
+          />
+        </div>
+
       </div>
+
     </div>
+
   );
 };
 
